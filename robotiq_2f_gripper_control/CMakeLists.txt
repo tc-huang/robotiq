@@ -1,7 +1,7 @@
 # http://ros.org/doc/groovy/api/catkin/html/user_guide/supposed.html
 cmake_minimum_required(VERSION 2.8.3)
 project(robotiq_2f_gripper_control)
-find_package(catkin REQUIRED COMPONENTS robotiq_ethercat roscpp rospy message_generation)
+find_package(catkin REQUIRED COMPONENTS roscpp rospy message_generation)
 
 
 #set the default path for built executables to the "bin" directory
@@ -41,18 +41,7 @@ include_directories(
   ${robotiq_ethercat_INCLUDE_DIRS}
 )
 
-add_executable(robotiq_2f_gripper_ethercat_node
-  src/robotiq_2f_gripper_control/robotiq_2f_gripper_ethercat_node.cpp
-  src/robotiq_2f_gripper_control/robotiq_2f_gripper_ethercat_client.cpp
-)
 
-target_link_libraries(robotiq_2f_gripper_ethercat_node
-   ${robotiq_ethercat_LIBRARIES}
-   ${catkin_LIBRARIES}
-  
-)
-
-add_dependencies(robotiq_2f_gripper_ethercat_node robotiq_2f_gripper_control_generate_messages_cpp)
 
 #############
 ## Install ##
@@ -61,6 +50,11 @@ add_dependencies(robotiq_2f_gripper_ethercat_node robotiq_2f_gripper_control_gen
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/groovy/api/catkin/html/adv_user_guide/variables.html
 
-install(PROGRAMS nodes/Robotiq2FGripperSimpleController.py nodes/Robotiq2FGripperStatusListener.py
-    nodes/Robotiq2FGripperTcpNode.py nodes/Robotiq2FGripperRtuNode.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+install(PROGRAMS
+  nodes/Robotiq2FGripperSimpleController.py
+  nodes/Robotiq2FGripperStatusListener.py
+  nodes/Robotiq2FGripperTcpNode.py
+  nodes/Robotiq2FGripperRtuNode.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
